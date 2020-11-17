@@ -1,0 +1,8 @@
+CMakeLists.txt
+cmake-build-debug
+.DS_Store
+.idea
+!main.cpp
+!CPPResolver.*
+!common.h
+!Makefile
