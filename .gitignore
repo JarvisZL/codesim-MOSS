@@ -3,7 +3,8 @@ cmake-build-debug
 .DS_Store
 .idea
 .test/parser
-.test/*.swp
+.test/.*.swp
+.*.swp
 !main.cpp
 !CPPResolver.*
 !common.h

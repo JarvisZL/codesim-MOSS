@@ -243,8 +243,6 @@ int resolve(const std::string& _filename, std::string& _outstr){
     std::transform(_outstr.begin(), _outstr.end(), _outstr.begin(), asciitolower);
     //去除空格
     trim(_outstr);
-
-    std::cout << _outstr <<std::endl;
     unlink(nfile.c_str());
     return EXIT_OK;
 }

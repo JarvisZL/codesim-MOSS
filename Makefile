@@ -12,5 +12,6 @@ clean:
 	rm -rf newfile*
 	rm codesim 
 	rm -rf output
+	rm -rf .*.swp
 
 .PHONY: clean test
