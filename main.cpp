@@ -114,30 +114,8 @@ int ArgsCheck(int _argc, char* _argv[]){
     return EXIT_ILLEGAL_ARG;
 }
 
-//char asciitolower(char in){
-//    if( in <= 'Z' && in >= 'A'){
-//        return in - ('Z' - 'z');
-//    }
-//    return in;
-//}
-//
-//int Txtprocess(const std::string& _filename, std::string& _filetxt){
-//    if(!_filetxt.empty())
-//        _filetxt.clear();
-//    std::ifstream fin(_filename);
-//    if(!fin){
-//        std::cerr << "open file: " << _filename << " failed." << std::endl;
-//        return EXIT_OPEN_FAIL;
-//    }
-//    std::string tmptxt;
-//    while( fin >> tmptxt ){
-//        std::transform(tmptxt.begin(), tmptxt.end(), tmptxt.begin(), asciitolower);
-//        _filetxt.append(tmptxt);
-//    }
-//    return EXIT_OK;
-//}
-
 int main(int argc, char* argv[]) {
+    //参数检查
     int argstatus = ArgsCheck(argc, argv);
     if(argstatus != EXIT_OK)
         return argstatus;
@@ -150,18 +128,20 @@ int main(int argc, char* argv[]) {
         cppfile2 = std::string(argv[3]);
     } else
         return EXIT_IMP;
-/*
-    std::string filetxt1, filetxt2;
-    //文本处理
-    int Txtstatus = Txtprocess(cppfile1, filetxt1);
-    if(Txtstatus != EXIT_OK)
-        return Txtstatus;
-    Txtstatus = Txtprocess(cppfile2, filetxt2);
-    if(Txtstatus != EXIT_OK)
-        return Txtstatus;
-*/
 
-    std::string str1;
-    int resolvestatus = resolve(cppfile1, str1);
+    //解析cpp文件得到字符串
+    std::string outstr1, outstr2;
+    int resolvestatus = resolve(cppfile1, outstr1);
+    if(resolvestatus != EXIT_OK){
+        std::cerr << "resolve file:" << cppfile1 << " failed." << std::endl;
+    }
+//    resolvestatus = resolve(cppfile2, outstr2);
+//    if(resolvestatus != EXIT_OK){
+//        std::cerr << "resolve file:" << cppfile2 << " failed." << std::endl;
+//    }
+
+    //std::cout << outstr1 << std::endl << outstr2;
+
+
     return EXIT_OK;
 }

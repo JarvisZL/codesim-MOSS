@@ -7,6 +7,9 @@
 #include <cstdlib>
 #include <cstdint>
 #include <unistd.h>
+#include <algorithm>
+#include <vector>
+#include <unordered_map>
 
 //MACRO
 #define EXIT_OK 0
@@ -17,9 +20,6 @@
 #define EXIT_LACK_OP -3
 #define EXIT_ILLEGAL_ARG -4
 #define EXIT_HELP -5
-
-//For Txtprocess
-#define EXIT_OPEN_FAIL -6
 
 
 

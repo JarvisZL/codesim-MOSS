@@ -20,7 +20,7 @@ int main(){
   CXIndex index = clang_createIndex(0, 0);
   CXTranslationUnit unit = clang_parseTranslationUnit(
     index,
-    "a.cpp", nullptr, 0,
+    "d.cpp", nullptr, 0,
     nullptr, 0,
     CXTranslationUnit_None);
   if (unit == nullptr)
