@@ -23,6 +23,7 @@
 #define EXIT_ILLEGAL_ARG -4
 #define EXIT_HELP -5
 
-
+extern bool Verflag;
+extern int K_s, T_s, W_s;
 
 #endif //CODESIM_COMMON_H

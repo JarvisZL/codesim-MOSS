@@ -1,12 +1,11 @@
 #include "CPPResovler.h"
+#include "Winnowing.h"
 
-static bool Verflag = false;
-std::string cppfile1, cppfile2;
+bool Verflag = false;
+int K_s = 10, T_s = 20, W_s;
+static std::string cppfile1, cppfile2;
 
-const int k = 10, t = 20;
-#define w  t - k + 1
-
-int ArgsCheck(int _argc, char* _argv[]){
+static int ArgsCheck(int _argc, char* _argv[]){
     //argc == 1
     if(_argc == 1){
         std::cout << "codesim: missing arguments." << std::endl;
@@ -114,7 +113,16 @@ int ArgsCheck(int _argc, char* _argv[]){
     return EXIT_ILLEGAL_ARG;
 }
 
+//for verbose
+static void showfingerprints(const std::string& filename, const std::vector<std::pair<std::size_t, std::size_t>>& fpvec){
+    std::cout << "codesim: fingerprints([hash value, location]) of '" << filename << "': " << std::endl;
+    for(auto& item: fpvec){
+        std::cout << "[" << item.first << "," << item.second << "]" << std::endl;
+    }
+}
+
 int main(int argc, char* argv[]) {
+    W_s = T_s - K_s + 1;
     //参数检查
     int argstatus = ArgsCheck(argc, argv);
     if(argstatus != EXIT_OK)
@@ -133,13 +141,35 @@ int main(int argc, char* argv[]) {
     std::string outstr1, outstr2;
     int resolvestatus = resolve(cppfile1, outstr1);
     if(resolvestatus != EXIT_OK){
-        std::cerr << "resolve file:" << cppfile1 << " failed." << std::endl;
+        std::cerr << "codesim: resolve file:" << cppfile1 << " failed." << std::endl;
+        return resolvestatus;
     }
     resolvestatus = resolve(cppfile2, outstr2);
     if(resolvestatus != EXIT_OK){
-        std::cerr << "resolve file:" << cppfile2 << " failed." << std::endl;
+        std::cerr << "codesim: resolve file:" << cppfile2 << " failed." << std::endl;
+        return resolvestatus;
     }
 
-    std::cout << outstr1 << std::endl << std::endl << outstr2;
+    //WINNOWING
+    //first is hash value, second is location
+    std::vector<std::pair<std::size_t, std::size_t>> fingerprints1, fingerprints2;
+    int winstatus = winnowing(outstr1, fingerprints1);
+    if(winstatus != EXIT_OK){
+        std::cerr << "codesim: winnowing string:" << outstr1 << " failed." << std::endl;
+        return winstatus;
+    }
+    winstatus = winnowing(outstr2, fingerprints2);
+    if(winstatus != EXIT_OK){
+        std::cerr << "codesim: winnowing string:" << outstr2 << " failed." << std::endl;
+        return winstatus;
+    }
+
+    if(Verflag){
+        showfingerprints(cppfile1, fingerprints1);
+        showfingerprints(cppfile2, fingerprints2);
+    }
+
+
+
     return EXIT_OK;
 }

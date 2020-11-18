@@ -6,7 +6,9 @@ parser: ${HXXFILES} ${CXXFILES}
 
 test: parser
 	./codesim ./tests/d.cpp ./tests/b.cpp
-	
+
+vtest: parser
+	./codesim -v ./tests/d.cpp ./tests/b.cpp
 
 clean:
 	rm -rf newfile*

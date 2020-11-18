@@ -2,9 +2,9 @@
 #include <clang-c/Index.h>
 
 // first is name, second is pattern;
-std::unordered_map<std::string, std::string> patternmap;
+static std::unordered_map<std::string, std::string> patternmap;
 // first is loc <lin,col>, second is name;
-std::vector<std::pair<std::pair<unsigned int, unsigned int>, std::string>> identifiervec;
+static std::vector<std::pair<std::pair<unsigned, unsigned>, std::string>> identifiervec;
 
 //将CXString变成std::string
 static std::string convert(const CXString& str){
@@ -143,7 +143,7 @@ static int getIdentifierTokens(const std::string& _filename){
         unsigned line, column;
         clang_getSpellingLocation(loc, NULL, &line, &column, NULL);
         if(kind == CXToken_Identifier){
-            identifiervec.push_back(std::make_pair(std::make_pair(line, column), convert(name)));
+            identifiervec.emplace_back(std::make_pair(std::make_pair(line, column), convert(name)));
         }
     }
 
@@ -165,7 +165,7 @@ static int replace(const std::string& _filename, std::string& _outstr){
     if(getstatus != EXIT_OK)
         return getstatus;
 
-    unsigned int flcnt = 0;
+    unsigned flcnt = 0;
     auto vecit = identifiervec.begin();
     std::ifstream fin(_filename);
     if(!fin){
@@ -179,7 +179,7 @@ static int replace(const std::string& _filename, std::string& _outstr){
         unsigned offset = 0;
         //std::cout << "origin: " << eachline << std::endl;
         while(vecit != identifiervec.end() && vecit->first.first == flcnt){
-            unsigned int column = vecit->first.second;
+            unsigned column = vecit->first.second;
             std::string replacestr = patternmap[vecit->second];
            // std::cout << "replace: " << replacestr << std::endl;
             if(!replacestr.empty()) {
@@ -195,7 +195,7 @@ static int replace(const std::string& _filename, std::string& _outstr){
 
 //去除空格
 static void trim(std::string& str){
-    int index = 0;
+    std::size_t index = 0;
     if(!str.empty()){
         while( (index = str.find_first_of(" \t\r\n")) != std::string::npos ){
             str.erase(index,1);
