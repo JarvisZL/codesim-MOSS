@@ -215,9 +215,9 @@ int main(int argc, char* argv[]) {
 
     float similarity = getsimilarity(fingerprints1, fingerprints2);
     if(Verflag)
-        std::cout << "The similarity of '" << cppfile1 << "' and '" << cppfile2 << "' is " << similarity << "%" << std::endl;
+        std::cout << "The similarity of '" << cppfile1 << "' and '" << cppfile2 << "' is " << similarity << std::endl;
     else
-        std::cout << similarity << "%" << std::endl;
+        std::cout << similarity << std::endl;
 
     return EXIT_OK;
 }
