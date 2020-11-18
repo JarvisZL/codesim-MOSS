@@ -23,12 +23,13 @@ static int winnow(const std::vector<std::size_t>& hashvec, std::vector<std::pair
     int mini = 0;
     while(true){
         r = (r + 1) % W_s;
-        if((window[r] = next_hash()) == SIZE_MAX)
+        if((window[r] = next_hash()) == SIZE_MAX) {
             break;
+        }
         if(mini == r){
             std::size_t htmpindex = hashindex - 1;
             std::size_t hfinalindex = hashindex - 1;
-            for(int i = (r - 1) % W_s; i != r; i = (i - 1 + W_s) % W_s){
+            for(int i = (r - 1 + W_s) % W_s; i != r; i = (i - 1 + W_s) % W_s){
                 htmpindex--;
                 if(window[i] < window[mini]){
                     mini = i;
@@ -47,7 +48,12 @@ static int winnow(const std::vector<std::size_t>& hashvec, std::vector<std::pair
     return EXIT_OK;
 }
 
-int winnowing(const std::string& instr, std::vector<std::pair<std::size_t, std::size_t>>& fpvec){
+//for verbose
+static void showhashes(const std::vector<std::size_t> & hashvec, const std::string& filename){
+    std::cout << "codesim(Verbose): file: '" << filename << "' number of hashes: " << hashvec.size() << std::endl;
+}
+
+int winnowing(const std::string& instr, std::vector<std::pair<std::size_t, std::size_t>>& fpvec, const std::string& filename){
     //get k-gram hashs
     std::vector<std::size_t> hashvec;
     int hashstatus = hashK_gram(instr, hashvec);
@@ -60,12 +66,14 @@ int winnowing(const std::string& instr, std::vector<std::pair<std::size_t, std::
         return EXIT_FAILURE;
     }
 
+    if(Verflag)
+        showhashes(hashvec, filename);
+
     //winnow
     int winstatus = winnow(hashvec, fpvec);
     if(winstatus != EXIT_OK){
         std::cerr << "codesim: calculate fingerprints of " << instr << " failed." << std::endl;
         return winstatus;
     }
-
     return EXIT_OK;
 }

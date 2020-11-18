@@ -5,7 +5,7 @@ parser: ${HXXFILES} ${CXXFILES}
 	clang++ -std=c++11 ${HXXFILE} ${CXXFILES} -I /usr/lib/llvm-7/include  -o codesim -lclang 
 
 test: parser
-	./codesim ./tests/d.cpp ./tests/b.cpp
+	./codesim ./tests/e.cpp ./tests/d.cpp
 
 vtest: parser
 	./codesim -v ./tests/d.cpp ./tests/b.cpp

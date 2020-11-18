@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <sys/stat.h>
 #include <regex>
+#include <cmath>
 
 //MACRO
 #define EXIT_OK 0

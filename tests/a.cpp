@@ -1,13 +1,10 @@
-#include <iostream>
-
-std::string gethello(){
-	return std::string("hello");
-}
+#include<iostream>
 
 int main()
 {
-    std::cout << gethello() << std::endl;
-    int MYVAR = 1;
-    std::cout << MYVAR << std::endl;
-    return 0;
+	int W_s = 3;
+	int a = -1;
+	std::cout << a % W_s << std::endl;
+	return 0;
 }
+
