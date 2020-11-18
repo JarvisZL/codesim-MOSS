@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
+#include <sys/stat.h>
+#include <regex>
 
 //MACRO
 #define EXIT_OK 0

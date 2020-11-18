@@ -135,13 +135,11 @@ int main(int argc, char* argv[]) {
     if(resolvestatus != EXIT_OK){
         std::cerr << "resolve file:" << cppfile1 << " failed." << std::endl;
     }
-//    resolvestatus = resolve(cppfile2, outstr2);
-//    if(resolvestatus != EXIT_OK){
-//        std::cerr << "resolve file:" << cppfile2 << " failed." << std::endl;
-//    }
+    resolvestatus = resolve(cppfile2, outstr2);
+    if(resolvestatus != EXIT_OK){
+        std::cerr << "resolve file:" << cppfile2 << " failed." << std::endl;
+    }
 
-    //std::cout << outstr1 << std::endl << outstr2;
-
-
+    std::cout << outstr1 << std::endl << std::endl << outstr2;
     return EXIT_OK;
 }

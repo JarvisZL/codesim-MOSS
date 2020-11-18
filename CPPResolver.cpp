@@ -1,6 +1,5 @@
 #include "CPPResovler.h"
-#include <clang-c/Index.h>// This is libclang.
-#include <sys/stat.h>
+#include <clang-c/Index.h>
 
 // first is name, second is pattern;
 std::unordered_map<std::string, std::string> patternmap;
@@ -42,6 +41,7 @@ static std::string removeInclude(const std::string& _filename){
     return std::string(nfilename);
 }
 
+//转换小写
 static char asciitolower(char in){
     if( in <= 'Z' && in >= 'A'){
         return in - ('Z' - 'z');
@@ -197,7 +197,7 @@ static int replace(const std::string& _filename, std::string& _outstr){
 static void trim(std::string& str){
     int index = 0;
     if(!str.empty()){
-        while( (index = str.find(' ', index)) != std::string::npos){
+        while( (index = str.find_first_of(" \t\r\n")) != std::string::npos ){
             str.erase(index,1);
         }
     }
