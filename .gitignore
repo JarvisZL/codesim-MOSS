@@ -2,6 +2,8 @@ CMakeLists.txt
 cmake-build-debug
 .DS_Store
 .idea
+.test/parser
+.test/*.swp
 !main.cpp
 !CPPResolver.*
 !common.h
