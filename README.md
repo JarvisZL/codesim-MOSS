@@ -16,3 +16,15 @@ deb http://ftp.cn.debian.org/debian buster main
 ```
 
 安装完依赖库后可直接在codesim-Moss目录下make即可完成编译。
+
+```shell
+make / make parser: 编译得到可执行二进制文件
+
+make test: 用codesim二进制文件测试tests文件夹中t1.cpp和t2.cpp的相似度(./codesim ./tests/t1.cpp ./tests/t2.cpp)
+
+make verbosetest: ./codesim -v ./tests/t1.cpp ./tests/t2.cpp
+
+make prepare: 通过apt安装clang-7和libclang-7-dev (sudo 权限)
+
+make clean: 删除可生成的文件,如codesim可执行文件
+```

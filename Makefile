@@ -16,9 +16,9 @@ prepare:
 
 
 clean:
-	rm -rf newfile*
-	rm codesim 
-	rm -rf output
-	rm -rf .*.swp
+	rm -f newfile*
+	rm -f codesim 
+	rm -f output
+	rm -f .*.swp
 
 .PHONY: clean test vtest prepare
