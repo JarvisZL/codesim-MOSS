@@ -2,7 +2,7 @@
 #include "Winnowing.h"
 
 bool Verflag = false;
-int K_s = 20, T_s = 24, W_s;
+int K_s = 7, T_s = 10, W_s;
 static std::string cppfile1, cppfile2;
 static std::string outstr1, outstr2;
 
